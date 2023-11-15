@@ -18,8 +18,14 @@
 </template>
 
 <script>
+import { store } from '../../assets/data/store.js'
 export default {
-    name: 'HeaderComp'
+    name: 'HeaderComp',
+    data() {
+        return {
+            store,
+        }
+    }
 }
 </script>
 
