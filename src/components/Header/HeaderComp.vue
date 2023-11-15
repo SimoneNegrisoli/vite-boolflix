@@ -10,20 +10,28 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
                 <input type="text" class="form-control border-start-0" placeholder="Cerca film o serie tv.."
-                    aria-describedby="basic-add1">
-                <button class="btn" @click=""> Cerca</button>
+                    aria-describedby="basic-add1" v-model="store.params.query">
+                <button class="btn" @click="search"> Cerca</button>
             </div>
         </nav>
     </header>
 </template>
 
 <script>
+
 import { store } from '../../assets/data/store.js'
 export default {
     name: 'HeaderComp',
     data() {
         return {
             store,
+        }
+    },
+    methods: {
+        search() {
+            if (this.store.params.query.trim() !== '') {
+                this.$emit('search', store.params.query)
+            }
         }
     }
 }

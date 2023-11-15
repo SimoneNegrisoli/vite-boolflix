@@ -1,5 +1,5 @@
 <template>
-  <HeaderComp />
+  <HeaderComp @search="handelSearch" />
   <MainComp />
 </template>
 
@@ -21,11 +21,18 @@ export default {
     }
   },
   methods: {
+
+    handelSearch() {
+      this.getMovies()
+    },
+
+
     getMovies() {
       const url = store.apiUrl + this.store.endPoint.movies;
 
       axios.get(url, { params: this.store.params }).then((resp) => {
-
+        store.moviesList = resp.data.results
+        console.log(this.getMovies)
       })
     },
     /* getMoviesandSeris (){

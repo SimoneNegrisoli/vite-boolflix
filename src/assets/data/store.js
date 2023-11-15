@@ -15,7 +15,7 @@ export const store = reactive({
 
 
     error: '',
-    loading: true,
+
     moviesList: [], // qui ritorno i dati delle api
     seriesList: []
 })
