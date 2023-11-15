@@ -1,18 +1,20 @@
 <template>
-  <main>
-    <section id="movie">
-      <h2>movies</h2>
-    </section>
-    <section id="serie">
-      tv
-    </section>
-  </main>
+  <HeaderComp />
+  <MainComp />
 </template>
 
 <script>
+import HeaderComp from './components/Header/HeaderComp.vue';
+import MainComp from './components/Main/MainComp.vue';
+
 import axios from 'axios';
 import { store } from './assets/data/store.js';
 export default {
+  name: 'App',
+  components: {
+    HeaderComp,
+    MainComp
+  },
   data() {
     return {
       store,
