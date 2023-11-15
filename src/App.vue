@@ -33,6 +33,9 @@ export default {
       axios.get(url, { params: this.store.params }).then((resp) => {
         store.moviesList = resp.data.results
         console.log(this.getMovies)
+      }).catch((error) => {
+        this.store.error = error.message
+        console.log('errore nella chiamata')
       })
     },
     /* getMoviesandSeris (){
