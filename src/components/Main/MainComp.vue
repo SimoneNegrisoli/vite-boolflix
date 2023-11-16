@@ -13,6 +13,10 @@
                             <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
                         </li>
                         <li>{{ movie.vote_average }}</li>
+                        <li>
+                            <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)"
+                                :alt="movie.original_title">
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -31,6 +35,10 @@
                             <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
                         </li>
                         <li>{{ serie.vote_average }}</li>
+                        <li>
+                            <img v-if="serie.poster_path" :src="getCoverSeries(serie.poster_path)"
+                                :alt="serie.original_name">
+                        </li>
                     </ul>
                 </li>
                 </li>
@@ -47,7 +55,7 @@ export default {
         return {
             store,
             flags: ['de', 'fr', 'it', 'jp', 'kr', 'es', 'uk'],
-            imgPath: 'https://image.tmdb.org/t/p/original/'
+            imgPath: 'https://image.tmdb.org/t/p/w342/'
         }
     },
     methods: {
@@ -60,6 +68,14 @@ export default {
         getFlag(originalLanguage) {
             let flag = `/public/images/${originalLanguage}.png`
             return flag
+        },
+        getCoverMovie(posterPath) {
+            let imgCover = `${this.imgPath}${posterPath}`;
+            return imgCover
+        },
+        getCoverSeries(posterPathSeries) {
+            let imgCover = `${this.imgPath}${posterPathSeries}`;
+            return imgCover
         }
     }
 }
