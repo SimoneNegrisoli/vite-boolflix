@@ -8,7 +8,8 @@
                     <ul>
                         <li>{{ movie.original_title }}</li>
                         <li>
-                            <img :src="getFlag" :alt="movie.original_language" class="myfleg">
+                            <img v-if="getFlag(movie.original_language)" :src="getFlag(movie.original_language)"
+                                :alt="movie.original_language" class="myfleg">
                         </li>
                         <li>{{ movie.vote_average }}</li>
                     </ul>
@@ -33,7 +34,7 @@ export default {
         }
     },
     computed: {
-        getFlag() {
+        getFlag(originalLanguage) {
             let flag = `/public/images/${this.original_language}.png`
             if (!this.flags.includes(this.original_language)) {
                 flag = '/public/images/fake.png'
