@@ -33,17 +33,18 @@ export default {
             imgPath: 'https://image.tmdb.org/t/p/original/'
         }
     },
-    computed: {
+    methods: {
         hasFlag(originalLanguage) {
-            if (this.flags.includes(this.original_language)) {
+            if (this.flags.includes(originalLanguage)) {
                 return true
             }
             return false
         },
-
         getFlag(originalLanguage) {
-            let flag = `/public/images/${this.original_language}.png`
-            return flag
+            return (originalLanguage) => {
+                let flag = `/public/images/${originalLanguage}`
+                return flag
+            }
         }
     }
 }
