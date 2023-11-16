@@ -23,38 +23,38 @@ export default {
   methods: {
 
     handelSearch() {
-      this.getMovies()
+      this.getMoviesandSeris()
     },
 
 
-    getMovies() {
-      const url = store.apiUrl + this.store.endPoint.movies;
-      console.log(url)
+    // getMovies() {
+    //   const url = store.apiUrl + this.store.endPoint.movies;
+    //   console.log(url)
 
 
-      axios.get(url, { params: this.store.params }).then((resp) => {
-        store.moviesList = resp.data.results
-        console.log(moviesList)
-      }).catch((error) => {
-        this.store.error = error.message
-        console.log('errore nella chiamata')
+    //   axios.get(url, { params: this.store.params }).then((resp) => {
+    //     this.store.moviesList = resp.data.results
+    //     console.log(moviesList)
+    //   }).catch((error) => {
+    //     this.store.error = error.message
+    //     console.log('errore nella chiamata')
+    //   })
+    // },
+    getMoviesandSeris() {
+      const movieUrl = store.apiUrl + this.store.endPoint.movies;
+
+      axios.get(movieUrl, { params: this.store.params }).then((resp) => {
+        this.store.moviesList = resp.data.results;
       })
-    },
-    /* getMoviesandSeris (){
-       const movieurl = store.apiUrl + this.store.endPoint.movies;
 
-      axios.get(url, { params: this.store.params }).then((resp) => {
-        this.store.movieList = resp.data.results;
-      })
+      const seriesUrl = store.apiUrl + this.store.endPoint.series;
 
-       const seriesurl = store.apiUrl + this.store.endPoint.series;
-
-      axios.get(url, { params: this.store.params }).then((resp) => {
-        this.store.movieList = resp.data.results;
+      axios.get(seriesUrl, { params: this.store.params }).then((resp) => {
+        this.store.seriesList = resp.data.results;
 
       })
     }
-    */
+
   },
   created() {
     //this.getMoviesandSeris()
