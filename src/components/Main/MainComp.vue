@@ -12,10 +12,13 @@
                                 :alt="movie.original_language" class="myfleg">
                             <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
                         </li>
-                        <li>{{ movie.vote_average }}</li>
                         <li>
                             <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)"
                                 :alt="movie.original_title">
+                        </li>
+                        <li>
+                            <i v-for="n in 5" :key="n" class="fa-star"
+                                :class="(n <= getVoted(movie.vote_average)) ? 'fa-solid' : 'fa-regular'"></i>
                         </li>
                     </ul>
                 </li>
@@ -34,10 +37,14 @@
                                 :alt="serie.original_language" class="myfleg">
                             <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
                         </li>
-                        <li>{{ serie.vote_average }}</li>
+
                         <li>
                             <img v-if="serie.poster_path" :src="getCoverSeries(serie.poster_path)"
                                 :alt="serie.original_name">
+                        </li>
+                        <li>
+                            <i v-for="n in 5" :key="n" class="fa-star"
+                                :class="(n <= getVoted(serie.vote_average)) ? 'fa-solid' : 'fa-regular'"></i>
                         </li>
                     </ul>
                 </li>
@@ -76,6 +83,9 @@ export default {
         getCoverSeries(posterPathSeries) {
             let imgCover = `${this.imgPath}${posterPathSeries}`;
             return imgCover
+        },
+        getVoted(vote) {
+            return Math.ceil(vote / 2)
         }
     }
 }
