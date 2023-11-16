@@ -8,14 +8,14 @@ export const store = reactive({
     },
 
     params: {
-        api_Key: '2b75ee9db9dabeba644693b28e420431',
-        query: ''
+        query: '',
+        api_key: '2b75ee9db9dabeba644693b28e420431'
     },
 
 
 
     error: '',
 
-    moviesList: [], // qui ritorno i dati delle api
+    moviesList: [], // qui mi ritorno i dati delle api
     seriesList: []
 })

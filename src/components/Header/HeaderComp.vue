@@ -30,7 +30,7 @@ export default {
     methods: {
         search() {
             if (this.store.params.query.trim() !== '') {
-                this.$emit('search', store.params.query)
+                this.$emit('search', this.store.params.query)
             }
         }
     }
