@@ -41,10 +41,8 @@ export default {
             return false
         },
         getFlag(originalLanguage) {
-            return (originalLanguage) => {
-                let flag = `/public/images/${originalLanguage}`
-                return flag
-            }
+            let flag = `/public/images/${originalLanguage}`
+            return flag
         }
     }
 }
