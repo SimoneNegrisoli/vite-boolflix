@@ -1,28 +1,35 @@
 <template>
     <main>
-        <section id="movie">
-            <h2>movies</h2>
+        <section id="movie" class="container">
+            <div class="row">
+                <h2>movies</h2>
 
-            <div v-for="movie in this.store.moviesList" :key="movie.id" class="mybox" @mouseover="flipCard(movie, true)"
-                @mouseleave="flipCard(movie, false)">
-                <div class=" box-inner" :class="['box-inner', { 'flipped': isFlipped }]">
-                    <div class="box-front">
-                        <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)" :alt="movie.original_title">
-                    </div>
-                    <div class="box-back">
-                        <h4>{{ movie.title }}</h4>
-                        <h6>{{ movie.original_title }}</h6>
-                        <div>
-                            <img v-if="hasFlag(movie.original_language)" :src="getFlag(movie.original_language)"
-                                :alt="movie.original_language" class="myfleg">
-                            <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
+                <div v-for="movie in this.store.moviesList" :key="movie.id" class="mybox col-12 col-md-2"
+                    @mouseover="movie.isFlipped = true" @mouseleave="movie.isFlipped = false">
+                    <div class=" box-inner" :class="['box-inner', { 'flipped': isFlipped }]">
+                        <div class="box-front">
+                            <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)"
+                                :alt="movie.original_title">
                         </div>
-                        <div>
-                            <i v-for="n in 5" :key="n" class="fa-star"
-                                :class="(n <= getVoted(movie.vote_average)) ? 'fa-solid' : 'fa-regular'"></i>
+                        <div class="box-back">
+                            <h4>{{ movie.title }}</h4>
+                            <h6>{{ movie.original_title }}</h6>
+                            <div>
+                                <img v-if="hasFlag(movie.original_language)" :src="getFlag(movie.original_language)"
+                                    :alt="movie.original_language" class="myfleg">
+                                <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
+                            </div>
+                            <div>
+                                <i v-for="n in 5" :key="n" class="fa-star"
+                                    :class="(n <= getVoted(movie.vote_average)) ? 'fa-solid' : 'fa-regular'"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
 
             </div>
 
@@ -91,12 +98,12 @@ export default {
         getVoted(vote) {
             return Math.ceil(vote / 2)
         },
-        flipCard(movie, value) {
-            const index = this.store.moviesList.findIndex(movie => movie.id)
-            this.movie = index
-            this.isFlipped = value;
-        },
-
+        // flipCard(movie, value) {
+        //     const index = this.store.moviesList.findIndex(m => m.id === movie.id);
+        //     if (index !== -1) {
+        //         this.$set(this.isFlipped, index, value);
+        //     }
+        // },
     }
 }
 </script>
@@ -116,7 +123,7 @@ export default {
 
     perspective: 1000px;
     width: 342px;
-    height: 450px;
+    height: 488px;
 
 
     .box-inner {
