@@ -1,8 +1,8 @@
 <template>
     <header>
         <nav class="d-flex justify-content-between container ">
-            <div>
-                logo
+            <div class="mylogo">
+                BOOLFLIX
             </div>
             <!-- input search -->
             <div class="input-group">
@@ -32,6 +32,7 @@ export default {
             if (this.store.params.query.trim() !== '') {
                 this.$emit('search', this.store.params.query)
             }
+            this.store.params.query = ''
         }
     }
 }
@@ -47,5 +48,16 @@ header {
 .input-group {
     width: 300px;
     background-color: white;
+}
+
+.mylogo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #E50914;
+    transition: all 0.5s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 </style>

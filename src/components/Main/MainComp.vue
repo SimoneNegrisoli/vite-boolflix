@@ -2,27 +2,30 @@
     <main>
         <section id="movie">
             <h2>movies</h2>
-            <ul>
-                <li v-for="movie in this.store.moviesList">
-                    <h4>{{ movie.title }}</h4>
-                    <ul>
-                        <li>{{ movie.original_title }}</li>
-                        <li>
+
+            <div v-for="movie in this.store.moviesList" class="mybox" @mouseover="flipCard(true)"
+                @mouseleave="flipCard(false)">
+                <div class=" box-inner" :class="['box-inner', { 'flipped': isFlipped }]">
+                    <div class="box-front">
+                        <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)" :alt="movie.original_title">
+                    </div>
+                    <div class="box-back">
+                        <h4>{{ movie.title }}</h4>
+                        <h6>{{ movie.original_title }}</h6>
+                        <div>
                             <img v-if="hasFlag(movie.original_language)" :src="getFlag(movie.original_language)"
                                 :alt="movie.original_language" class="myfleg">
                             <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
-                        </li>
-                        <li>
-                            <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)"
-                                :alt="movie.original_title">
-                        </li>
-                        <li>
+                        </div>
+                        <div>
                             <i v-for="n in 5" :key="n" class="fa-star"
                                 :class="(n <= getVoted(movie.vote_average)) ? 'fa-solid' : 'fa-regular'"></i>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </section>
         <section id="serie">
             <h2>Serie tv</h2>
@@ -62,7 +65,8 @@ export default {
         return {
             store,
             flags: ['de', 'fr', 'it', 'jp', 'kr', 'es', 'uk'],
-            imgPath: 'https://image.tmdb.org/t/p/w342/'
+            imgPath: 'https://image.tmdb.org/t/p/w342/',
+            isFlipped: false
         }
     },
     methods: {
@@ -86,7 +90,11 @@ export default {
         },
         getVoted(vote) {
             return Math.ceil(vote / 2)
-        }
+        },
+        flipCard(value) {
+            this.isFlipped = value;
+        },
+
     }
 }
 </script>
@@ -98,5 +106,58 @@ export default {
 
 #serie {
     background-color: red;
+}
+
+.mybox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    perspective: 1000px;
+
+
+    .box-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+
+        &.flipped {
+            transform: rotateY(180deg);
+        }
+
+
+    }
+
+    .box-front {
+        background-color: #cccccc;
+        color: #111111;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .box-front,
+    .box-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+    }
+
+    .box-front {
+        background-color: #cccccc;
+        color: #111111;
+    }
+
+    .box-back {
+        background-color: #8ebf42;
+        color: #eeeeee;
+        transform: rotateY(180deg);
+    }
 }
 </style>

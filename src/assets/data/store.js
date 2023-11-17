@@ -11,11 +11,11 @@ export const store = reactive({
         query: '',
         api_key: '2b75ee9db9dabeba644693b28e420431'
     },
-
-
-
     error: '',
-
     moviesList: [], // qui mi ritorno i dati delle api
-    seriesList: []
+    seriesList: [],
+
+    selectedMovie: null,
+    selectedSeries: null,
+
 })
