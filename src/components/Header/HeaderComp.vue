@@ -39,6 +39,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// @use './partials/variables.scss' as *;
+
 header {
     padding: 20px;
     background-color: black;
