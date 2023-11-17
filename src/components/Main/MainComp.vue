@@ -6,7 +6,7 @@
 
                 <div v-for="movie in this.store.moviesList" :key="movie.id" class="mybox col-12 col-md-2"
                     @mouseover="movie.isFlipped = true" @mouseleave="movie.isFlipped = false">
-                    <div class=" box-inner" :class="['box-inner', { 'flipped': isFlipped }]">
+                    <div class=" box-inner" :class="['box-inner', { 'flipped': movie.isFlipped }]">
                         <div class="box-front">
                             <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)"
                                 :alt="movie.original_title">
@@ -34,9 +34,36 @@
             </div>
 
         </section>
-        <section id="serie">
-            <h2>Serie tv</h2>
-            <ul>
+        <section id="serie" class="container">
+            <div class="row">
+                <h2>Serie tv</h2>
+
+                <div v-for="serie in this.store.seriesList" :key="serie.id" class="mybox col-12 col-md-2"
+                    @mouseover="serie.isFlipped = true" @mouseleave="serie.isFlipped = false">
+                    <div class=" box-inner" :class="['box-inner', { 'flipped': serie.isFlipped }]">
+                        <div class="box-front">
+                            <img v-if="serie.poster_path" :src="getCoverMovie(serie.poster_path)"
+                                :alt="serie.original_title">
+                        </div>
+                        <div class="box-back">
+                            <h4>{{ serie.name }}</h4>
+                            <h6>{{ serie.original_title }}</h6>
+                            <div>
+                                <img v-if="hasFlag(serie.original_language)" :src="getFlag(serie.original_language)"
+                                    :alt="serie.original_language" class="myfleg">
+                                <img v-else src="/public/images/fake.png" alt="no bandiera" class="myfleg">
+                            </div>
+                            <div>
+                                <i v-for="n in 5" :key="n" class="fa-star"
+                                    :class="(n <= getVoted(serie.vote_average)) ? 'fa-solid' : 'fa-regular'"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <ul>
                 <li>
                 <li v-for="serie in this.store.seriesList">
                     <h4>{{ serie.name }}</h4>
@@ -59,7 +86,7 @@
                     </ul>
                 </li>
                 </li>
-            </ul>
+            </ul> -->
         </section>
     </main>
 </template>
@@ -97,13 +124,7 @@ export default {
         },
         getVoted(vote) {
             return Math.ceil(vote / 2)
-        },
-        // flipCard(movie, value) {
-        //     const index = this.store.moviesList.findIndex(m => m.id === movie.id);
-        //     if (index !== -1) {
-        //         this.$set(this.isFlipped, index, value);
-        //     }
-        // },
+        }
     }
 }
 </script>
