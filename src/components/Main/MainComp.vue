@@ -3,8 +3,8 @@
         <section id="movie">
             <h2>movies</h2>
 
-            <div v-for="movie in this.store.moviesList" class="mybox" @mouseover="flipCard(true)"
-                @mouseleave="flipCard(false)">
+            <div v-for="movie in this.store.moviesList" :key="movie.id" class="mybox" @mouseover="flipCard(movie, true)"
+                @mouseleave="flipCard(movie, false)">
                 <div class=" box-inner" :class="['box-inner', { 'flipped': isFlipped }]">
                     <div class="box-front">
                         <img v-if="movie.poster_path" :src="getCoverMovie(movie.poster_path)" :alt="movie.original_title">
@@ -91,7 +91,9 @@ export default {
         getVoted(vote) {
             return Math.ceil(vote / 2)
         },
-        flipCard(value) {
+        flipCard(movie, value) {
+            const index = this.store.moviesList.findIndex(movie => movie.id)
+            this.movie = index
             this.isFlipped = value;
         },
 
@@ -101,7 +103,7 @@ export default {
 
 <style lang="scss" scoped>
 .myfleg {
-    width: 50px;
+    width: 30px;
 }
 
 #serie {
@@ -111,9 +113,10 @@ export default {
 .mybox {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
 
     perspective: 1000px;
+    width: 342px;
+    height: 450px;
 
 
     .box-inner {
