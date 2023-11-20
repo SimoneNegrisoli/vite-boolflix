@@ -49,7 +49,15 @@ header {
 
 .input-group {
     width: 300px;
+    height: 50px;
     background-color: white;
+
+
+    button {
+        background-color: #E50914;
+        border-radius: 0;
+        color: white;
+    }
 }
 
 .mylogo {
