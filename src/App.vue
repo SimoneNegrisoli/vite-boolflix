@@ -1,11 +1,13 @@
 <template>
   <HeaderComp @search="handelSearch" />
+  <Slider />
   <MainComp />
 </template>
 
 <script>
 import HeaderComp from './components/Header/HeaderComp.vue';
 import MainComp from './components/Main/MainComp.vue';
+import Slider from './components/Main/Slider.vue';
 
 import axios from 'axios';
 import { store } from './assets/data/store.js';
@@ -13,7 +15,8 @@ export default {
   name: 'App',
   components: {
     HeaderComp,
-    MainComp
+    MainComp,
+    Slider
   },
   data() {
     return {
